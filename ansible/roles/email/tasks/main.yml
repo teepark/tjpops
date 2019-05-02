@@ -1,0 +1,22 @@
+---
+- name: install mutt
+  pkgng:
+    name: mutt
+    state: present
+
+- name: install msmtp
+  pkgng:
+    name: msmtp
+    state: present
+
+- name: mutt config
+  template:
+    dest: /home/travis/.muttrc
+    src: muttrc
+
+- name: start a mutt tmux on reboot
+  cron:
+    name: start tmux/mutt on boot
+    special_time: reboot
+    job: tmux new -s email mutt
+    user: travis

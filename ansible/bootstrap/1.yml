@@ -1,0 +1,14 @@
+# STAGE 1
+# not even sudo or python are in the base FreeBSD install,
+# so install them now so we can use ansible and "become"
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    ansible_user: root
+  tasks:
+    - name: install python
+      raw: pkg install -y python36
+
+    - name: install sudo
+      raw: pkg install -y sudo

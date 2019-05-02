@@ -1,0 +1,5 @@
+venv/
+ansible/hosts
+ansible/.vault-pass
+ansible/group_vars/all/local.yml
+**/*.retry

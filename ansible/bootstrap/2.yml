@@ -1,0 +1,60 @@
+# STAGE 2
+# create the travis user and lock down root access
+---
+- hosts: all
+  vars:
+    ansible_user: root
+  tasks:
+    - name: install bash
+      pkgng:
+        name: bash
+        state: present
+
+    - name: create the travis user
+      user:
+        name: travis
+        append: yes
+        groups:
+          - wheel
+        password: "{{ travis_pass }}"
+        shell: /usr/local/bin/bash
+
+    - name: travis user .ssh directory
+      file:
+        path: /home/travis/.ssh
+        state: directory
+        owner: travis
+        mode: "0700"
+
+    - name: travis user authorized_keys
+      copy:
+        dest: /home/travis/.ssh/authorized_keys
+        src: /root/.ssh/authorized_keys
+        remote_src: yes
+        mode: preserve
+        owner: travis
+
+    - name: give wheel group passwordless sudo
+      lineinfile:
+        path: /usr/local/etc/sudoers
+        state: present
+        regexp: "^# %wheel ALL=\\(ALL\\) NOPASSWD: ALL$"
+        line: "%wheel ALL=(ALL) NOPASSWD: ALL"
+        backrefs: yes
+        validate: "/usr/local/sbin/visudo -cf %s"
+
+    - name: disable root ssh in config file
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        state: present
+        regexp: '^(#PermitRootLogin no)|(PermitRootLogin yes)$'
+        line: 'PermitRootLogin no'
+        backrefs: yes
+        validate: "/usr/sbin/sshd -t -f %s"
+      notify: restart sshd
+
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted

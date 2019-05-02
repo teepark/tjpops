@@ -1,0 +1,49 @@
+---
+- name: weechat backup credentials dir
+  file:
+    path: /home/travis/.weechat-backups
+    state: directory
+    owner: travis
+    mode: 0700
+
+- name: weechat backup restic password file
+  copy:
+    dest: /home/travis/.weechat-backups/restic-repo-passwd
+    mode: 0600
+    owner: travis
+    content: "{{ weechat_config_b2_backup.pass }}"
+
+- name: weechat backup b2 credentials dir
+  file:
+    path: /home/travis/.weechat-backups/b2/
+    state: directory
+    owner: travis
+    mode: 0700
+
+- name: weechat backup b2 credentials files
+  copy:
+    dest: "/home/travis/.weechat-backups/b2/{{ item.env_var }}"
+    mode: 0600
+    owner: travis
+    content: "{{ item.content }}"
+  loop:
+    - env_var: B2_ACCOUNT_ID
+      content: "{{ weechat_config_b2_backup.key.id }}"
+    - env_var: B2_ACCOUNT_KEY
+      content: "{{ weechat_config_b2_backup.key.value }}"
+
+- name: daily weechat config backup cron
+  cron:
+    name: daily weechat config backup
+    hour: 8
+    minute: 0
+    job: "chpst -e /home/travis/.weechat-backups/b2 restic --password-file=/home/travis/.weechat-backups/restic-repo-passwd -r b2:{{ weechat_config_b2_backup.repo.bucket }}:{{ weechat_config_b2_backup.repo.path }} backup /home/travis/.weechat"
+    user: travis
+
+- name: daily weechat config pruning cron
+  cron:
+    name: daily weechat config pruning
+    hour: 12
+    minute: 0
+    job: "chpst -e /home/travis/.weechat-backups/b2 restic --password-file=/home/travis/.weechat-backups/restic-repo-passwd -r b2:{{ weechat_config_b2_backup.repo.bucket }}:{{ weechat_config_b2_backup.repo.path }} forget --keep-daily 7 --keep-monthly 12 --keep-yearly 100 --keep-tag retain --prune"
+    user: travis

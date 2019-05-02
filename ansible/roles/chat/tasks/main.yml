@@ -1,0 +1,14 @@
+---
+- name: install weechat
+  pkgng:
+    name: weechat
+    state: present
+
+- name: start a weechat tmux on reboot
+  cron:
+    name: start tmux/weechat on boot
+    special_time: reboot
+    job: tmux new -s chat weechat
+    user: travis
+
+- import_tasks: backup.yml

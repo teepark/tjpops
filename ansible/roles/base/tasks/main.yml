@@ -1,0 +1,19 @@
+---
+- name: install base packages
+  pkgng:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - mosh
+    - tmux
+    - htop
+    - runit
+    - tree
+    - restic
+
+- name: daily restic self-update cron
+  cron:
+    name: daily restic self-update
+    hour: 0
+    minute: 0
+    job: restic self-update

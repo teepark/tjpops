@@ -1,0 +1,10 @@
+---
+weechat_config_b2_backup:
+  pass: "restic repo password"
+  key:
+    name: "not used?"
+    id: "b2 application key id"
+    value: "b2 application key"
+  repo:
+    bucket: "b2 bucket for backups"
+    path: "path within the b2 bucket"
