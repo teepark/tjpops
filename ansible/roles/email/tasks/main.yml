@@ -13,6 +13,7 @@
   template:
     dest: /home/travis/.muttrc
     src: muttrc
+    mode: 0600
 
 - name: start a mutt tmux on reboot
   cron:
