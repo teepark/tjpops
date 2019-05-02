@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+HERE="$(dirname "$0")"
+cd "$HERE/.." || exit
+
+if [ "$1" = "" ]; then
+	echo 'provide the host as an arugument' >&2
+	return 1
+fi
+
+ansible-playbook -i hosts -l "$1" bootstrap/1.yml bootstrap/2.yml
