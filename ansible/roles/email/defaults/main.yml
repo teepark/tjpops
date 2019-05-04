@@ -2,4 +2,4 @@
 gmail:
   name: 'Override Me'
   user: 'override@me.tld'
-  app_passwd: 'not a real password'
+  mutt_passwd: 'not a real password'
