@@ -17,16 +17,16 @@
 
 - name: mutt config
   template:
-    dest: /home/travis/.neomuttrc
+    dest: "/home/{{ system.username }}/.neomuttrc"
     src: muttrc
     mode: 0600
-    owner: travis
+    owner: "{{ system.username }}"
 
 - name: start a mutt tmux on reboot
   cron:
     name: start tmux/mutt on boot
     special_time: reboot
     job: tmux new -s email mutt
-    user: travis
+    user: "{{ system.username }}"
 
 - import_tasks: sync.yml

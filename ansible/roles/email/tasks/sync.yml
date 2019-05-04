@@ -6,14 +6,14 @@
 
 - name: isync config
   template:
-    dest: /home/travis/.mbsyncrc
+    dest: "/home/{{ system.username }}/.mbsyncrc"
     src: mbsyncrc
     mode: 0600
-    owner: travis
+    owner: "{{ system.username }}"
 
 - name: gmail cert file
   copy:
-    dest: /home/travis/.gmail-cert.pem
+    dest: "/home/{{ system.username }}/.gmail-cert.pem"
     src: gmail-cert.pem
     mode: 0600
-    owner: travis
+    owner: "{{ system.username }}"

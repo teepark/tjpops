@@ -1,5 +1,5 @@
 # STAGE 2
-# create the travis user and lock down root access
+# create the login user and lock down root access
 ---
 - hosts: all
   vars:
@@ -10,29 +10,29 @@
         name: bash
         state: present
 
-    - name: create the travis user
+    - name: "create the {{ system.username }} user"
       user:
-        name: travis
+        name: "{{ system.username }}"
         append: yes
         groups:
           - wheel
-        password: "{{ travis_pass }}"
+        password: "{{ system.userpass }}"
         shell: /usr/local/bin/bash
 
-    - name: travis user .ssh directory
+    - name: "{{ system.username }} user .ssh directory"
       file:
-        path: /home/travis/.ssh
+        path: "/home/{{ system.username }}/.ssh"
         state: directory
-        owner: travis
+        owner: "{{ system.username }}"
         mode: "0700"
 
-    - name: travis user authorized_keys
+    - name: {{ system.username }} user authorized_keys
       copy:
-        dest: /home/travis/.ssh/authorized_keys
+        dest: "/home/{{ system.username }}/.ssh/authorized_keys"
         src: /root/.ssh/authorized_keys
         remote_src: yes
         mode: preserve
-        owner: travis
+        owner: "{{ system.username }}"
 
     - name: give wheel group passwordless sudo
       lineinfile:

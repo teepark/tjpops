@@ -1,6 +1,6 @@
 IMAPAccount gmail
 Host imap.gmail.com
-User travis.parker@gmail.com
+User {{ gmail.user }}
 Pass {{ gmail.isync_passwd }}
 SSLType IMAPS
 CertificateFile ~/.gmail-cert.pem

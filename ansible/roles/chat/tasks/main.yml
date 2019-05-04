@@ -9,6 +9,6 @@
     name: start tmux/weechat on boot
     special_time: reboot
     job: tmux new -s chat weechat
-    user: travis
+    user: "{{ system.username }}"
 
 - import_tasks: backup.yml
