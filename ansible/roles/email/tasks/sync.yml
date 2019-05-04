@@ -1,0 +1,19 @@
+---
+- name: install isync
+  pkgng:
+    name: isync
+    state: present
+
+- name: isync config
+  template:
+    dest: /home/travis/.mbsyncrc
+    src: mbsyncrc
+    mode: 0600
+    owner: travis
+
+- name: gmail cert file
+  copy:
+    dest: /home/travis/.gmail-cert.pem
+    src: gmail-cert.pem
+    mode: 0600
+    owner: travis

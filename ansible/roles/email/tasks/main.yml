@@ -28,3 +28,5 @@
     special_time: reboot
     job: tmux new -s email mutt
     user: travis
+
+- import_tasks: sync.yml

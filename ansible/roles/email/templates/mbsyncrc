@@ -1,0 +1,32 @@
+IMAPAccount gmail
+Host imap.gmail.com
+User travis.parker@gmail.com
+Pass {{ gmail.isync_passwd }}
+SSLType IMAPS
+CertificateFile ~/.gmail-cert.pem
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+Path ~/Gmail/
+Inbox ~/Gmail/Inbox
+SubFolders Verbatim
+
+Channel gmail
+Master :gmail-remote:
+Slave :gmail-local:
+Patterns *
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+#Patterns * ![Gmail]* "[Gmail]/All Mail"
+Create Slave
+Expunge Slave
+Sync Pull
+
+# inbox-only channel
+Channel gmail-inbox
+Master :gmail-remote:
+Slave :gmail-local:
+Create Slave
+Expunge Slave
+Sync Pull
