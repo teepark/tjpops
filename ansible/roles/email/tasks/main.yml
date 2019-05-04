@@ -1,8 +1,14 @@
 ---
-- name: install mutt
+- name: install neomutt
   pkgng:
-    name: mutt
+    name: neomutt
     state: present
+
+- name: mutt->neomutt symlink
+  file:
+    src: /usr/local/bin/neomutt
+    dest: /usr/local/bin/mutt
+    state: link
 
 - name: install msmtp
   pkgng:
@@ -11,7 +17,7 @@
 
 - name: mutt config
   template:
-    dest: /home/travis/.muttrc
+    dest: /home/travis/.neomuttrc
     src: muttrc
     mode: 0600
     owner: travis
