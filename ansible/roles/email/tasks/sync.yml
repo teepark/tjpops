@@ -17,3 +17,10 @@
     src: gmail-cert.pem
     mode: 0600
     owner: "{{ system.username }}"
+
+- name: hourly gmail sync cron
+  cron:
+    name: hourly gmail sync
+    minute: 30
+    job: mbsync gmail
+    user: "{{ system.username }}"

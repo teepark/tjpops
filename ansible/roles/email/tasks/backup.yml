@@ -1,0 +1,49 @@
+---
+- name: gmail backup credentials dir
+  file:
+    path: "/home/{{ system.username }}/.gmail-backups"
+    state: directory
+    owner: "{{ system.username }}"
+    mode: 0700
+
+- name: gmail backup restic password file
+  copy:
+    dest: "/home/{{ system.username }}/.gmail-backups/restic-repo-passwd"
+    mode: 0600
+    owner: "{{ system.username }}"
+    content: "{{ gmail_b2_backup.pass }}"
+
+- name: gmail backup b2 credentials dir
+  file:
+    path: "/home/{{ system.username }}/.gmail-backups/b2/"
+    state: directory
+    owner: "{{ system.username }}"
+    mode: 0700
+
+- name: gmail backup b2 credentials files
+  copy:
+    dest: "/home/{{ system.username }}/.gmail-backups/b2/{{ item.env_var }}"
+    mode: 0600
+    owner: "{{ system.username }}"
+    content: "{{ item.content }}"
+  loop:
+    - env_var: B2_ACCOUNT_ID
+      content: "{{ gmail_b2_backup.key.id }}"
+    - env_var: B2_ACCOUNT_KEY
+      content: "{{ gmail_b2_backup.key.value }}"
+
+- name: daily gmail backup cron
+  cron:
+    name: daily gmail backup
+    hour: 8
+    minute: 45
+    user: "{{ system.username }}"
+    job: "chpst -e /home/{{ system.username }}/.gmail-backups/b2 restic --password-file=/home/{{ system.username }}/.gmail-backups/restic-repo-passwd -r b2:{{ gmail_b2_backup.repo.bucket }}:{{ gmail_b2_backup.repo.path }} backup /home/{{ system.username }}/Gmail"
+
+- name: daily gmail pruning cron
+  cron:
+    name: daily gmail pruning cron
+    hour: 13
+    minute: 0
+    user: "{{ system.username }}"
+    job: "chpst -e /home/{{ system.username }}/.gmail-backups/b2 restic --password-file=/home/{{ system.username }}/.gmail-backups/restic-repo-passwd -r b2:{{ gmail_b2_backup.repo.bucket }}:{{ gmail_b2_backup.repo.path }} forget --keep-daily 7 --keep-monthly 12 --keep-yearly 100 --keep-tag retain --prune"

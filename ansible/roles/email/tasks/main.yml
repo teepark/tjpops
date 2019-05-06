@@ -30,3 +30,4 @@
     user: "{{ system.username }}"
 
 - import_tasks: sync.yml
+- import_tasks: backup.yml
