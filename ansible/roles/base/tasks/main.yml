@@ -17,3 +17,10 @@
     hour: 0
     minute: 0
     job: restic self-update
+
+- name: tmux config file
+  copy:
+    dest: "/home/{{ system.username }}/.tmux.conf"
+    src: tmux.conf
+    owner: travis
+    mode: 0644
