@@ -75,7 +75,7 @@ set alias_file = '~/.mutt_alias' # default: ~/.muttrc
 # set fcc_attach = yes
 # set fcc_clear = no
 # set flag_safe = no
-set folder = "imaps://imap.gmail.com:993/"
+set folder = "~/Gmail"
 # set folder_format = '%2C %t %N %F %2l %-8.8u %-8.8g %8s %d %f'
 # set followup_to = yes
 # set force_name = no
@@ -121,14 +121,14 @@ set from = "{{ gmail.name }} <{{ gmail.user }}>"
 # set imap_list_subscribed = no
 # set imap_login = ''
 # set imap_oauth_refresh_command = ''
-set imap_pass = '{{ gmail.mutt_passwd }}'
+# set imap_pass = ''
 # set imap_passive = yes
 # set imap_peek = yes
 # set imap_pipeline_depth = 15
 # set imap_poll_timeout = 15
 # set imap_qresync = no
 # set imap_servernoise = yes
-set imap_user = '{{ gmail.user }}'
+# set imap_user = ''
 # set implicit_autoview = no
 # set include = ask-yes
 # set include_onlyfirst = no
@@ -151,11 +151,11 @@ set imap_user = '{{ gmail.user }}'
 # set mark_old = yes
 # set markers = yes
 # set mask = '!^\.[^.]'
-# set mbox = '~/mbox'
-# set mbox_type = 'mbox'
+set mbox = '+[Gmail]/All Mail'
+set mbox_type = 'Maildir'
 # set menu_context = 0
 # set menu_move_off = yes
-# set menu_scroll = no
+set menu_scroll = yes
 # set message_cache_clean = no
 # set message_cachedir = ''
 # set message_format = '%s'
@@ -176,6 +176,7 @@ set imap_user = '{{ gmail.user }}'
 # set narrow_tree = no
 # set net_inc = 10
 # set new_mail_command = ''
+set nm_default_uri = "notmuch:///home/{{ system.username }}/Gmail"
 # set pager = 'builtin'
 # set pager_context = 0
 # set pager_format = '-%Z- %C/%m: %-20.20n   %s%*  -- (%P)'
@@ -326,7 +327,7 @@ set smtp_url = 'smtps://{{ gmail.user }}@smtp.gmail.com:465/'
 # set sort_browser = 'alpha'
 # set sort_re = yes
 # set spam_separator = ','
-set spoolfile = "+INBOX"
+set spoolfile = "+Inbox"
 # set ssl_ca_certificates_file = ''
 # set ssl_client_cert = ''
 # set ssl_force_tls = no
@@ -377,3 +378,26 @@ set spoolfile = "+INBOX"
 # set wrapmargin = 0
 # set write_bcc = yes
 # set write_inc = 10
+
+bind index       X        vfolder-from-query
+
+macro index O "<shell-escape>mailsync gmail<enter>"       "run mbsync to resync all gmail"
+macro index o "<shell-escape>mailsync gmail-inbox<enter>" "run mbsync to resync gmail inbox"
+
+
+mailboxes +Inbox \
+          '+awaiting-reply' \
+          '+follow-up' \
+          '+reading-material' \
+          '+watching' \
+          '+[Gmail]/All Mail' \
+          '+[Gmail]/Drafts' \
+          '+[Gmail]/Important' \
+          '+[Gmail]/Sent Mail' \
+          '+[Gmail]/Spam' \
+          '+[Gmail]/Starred' \
+          '+[Gmail]/Trash' \
+          '/var/mail/{{ system.username }}' \
+          '+Boomerang' \
+          '+Boomerang-Outbox' \
+          '+Boomerang-Returned' \

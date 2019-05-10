@@ -18,9 +18,16 @@
     mode: 0600
     owner: "{{ system.username }}"
 
+- name: mailsync script
+  copy:
+    dest: /usr/local/bin/mailsync
+    src: mailsync
+    mode: 0755
+    owner: root
+
 - name: hourly gmail sync cron
   cron:
     name: hourly gmail sync
-    minute: 30
-    job: mbsync gmail
+    minute: 0
+    job: /usr/local/bin/mailsync gmail
     user: "{{ system.username }}"

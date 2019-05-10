@@ -21,7 +21,7 @@ Patterns *
 #Patterns * ![Gmail]* "[Gmail]/All Mail"
 Create Slave
 Expunge Slave
-Sync Pull
+Sync All
 
 # inbox-only channel
 Channel gmail-inbox
@@ -29,4 +29,4 @@ Master :gmail-remote:
 Slave :gmail-local:
 Create Slave
 Expunge Slave
-Sync Pull
+Sync All
