@@ -23,7 +23,7 @@ set alias_file = '~/.mutt_alias' # default: ~/.muttrc
 # set auto_tag = no
 # set autoedit = no
 # set beep = yes
-# set beep_new = no
+set beep_new = yes
 # set bounce = ask-yes
 # set bounce_delivered = yes
 # set braille_friendly = no
@@ -36,7 +36,7 @@ set alias_file = '~/.mutt_alias' # default: ~/.muttrc
 # set collapse_unread = yes
 # set compose_format = '-- Mutt: Compose  [Approx. msg size: %l   Atts: %a]%>-'
 # set config_charset = ''
-# set confirmappend = yes
+set confirmappend = no
 # set confirmcreate = yes
 # set connect_timeout = 30
 # set content_type = 'text/plain'
@@ -55,8 +55,9 @@ set alias_file = '~/.mutt_alias' # default: ~/.muttrc
 # set crypt_use_pka = no
 # set crypt_verify_sig = yes
 # set date_format = '!%a, %b %d, %Y at %I:%M:%S%p %Z'
+set date_format = '%Y/%m/%d'
 # set default_hook = '~f %s !~P | (~P ~C %s)'
-# set delete = ask-yes
+set delete = yes
 # set delete_untag = yes
 # set digest_collapse = yes
 # set display_filter = ''
@@ -64,14 +65,14 @@ set alias_file = '~/.mutt_alias' # default: ~/.muttrc
 # set dsn_notify = ''
 # set dsn_return = ''
 # set duplicate_threads = yes
-# set edit_headers = no
-# set editor = ''
+set edit_headers = yes
+set editor = 'vim'
 # set encode_from = no
 # set entropy_file = ''
 # set envelope_from_address = ''
 # set error_history = 30
 # set escape = '~'
-# set fast_reply = no
+set fast_reply = yes
 # set fcc_attach = yes
 # set fcc_clear = no
 # set flag_safe = no
@@ -85,12 +86,14 @@ set folder = "~/Gmail"
 # set forward_decrypt = yes
 # set forward_edit = yes
 # set forward_format = '[%a: %s]'
-# set forward_quote = no
+set forward_format = "Fwd: %s"
+set forward_quote = yes
 set from = "{{ gmail.name }} <{{ gmail.user }}>"
 # set gecos_mask = '^[^,]*'
 # set hdrs = yes
 # set header = no
-# set header_cache = ''
+set header_cache = '~/.neomutt-hcache/'
+set header_cache_backend = 'lmdb'
 # set header_cache_compress = yes
 # set header_cache_pagesize = '16384'
 # set header_color_partial = no
@@ -130,17 +133,18 @@ set from = "{{ gmail.name }} <{{ gmail.user }}>"
 # set imap_servernoise = yes
 # set imap_user = ''
 # set implicit_autoview = no
-# set include = ask-yes
+set include = yes
 # set include_onlyfirst = no
 # set indent_string = '>'
 {%- raw %}
 # set index_format = '%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s'
+set index_format = "%C [%Z]  %D  %-20.20F  %s"
 {%- endraw %}
 # set ispell = 'ispell'
 # set keep_flagged = no
 # set mail_check = 5
 # set mail_check_recent = yes
-# set mail_check_stats = no
+set mail_check_stats = yes
 # set mail_check_stats_interval = 60
 # set mailcap_path = ''
 # set mailcap_sanitize = yes
@@ -148,8 +152,8 @@ set from = "{{ gmail.name }} <{{ gmail.user }}>"
 # set maildir_trash = no
 # set maildir_check_cur = no
 # set mark_macro_prefix = '''
-# set mark_old = yes
-# set markers = yes
+set mark_old = no
+set markers = no
 # set mask = '!^\.[^.]'
 set mbox = '+[Gmail]/All Mail'
 set mbox_type = 'Maildir'
@@ -172,16 +176,16 @@ set menu_scroll = yes
 # set mime_type_query_first = no
 # set mix_entry_format = '%4n %c %-16s %a'
 # set mixmaster = 'mixmaster'
-# set move = no
+set move = no
 # set narrow_tree = no
 # set net_inc = 10
 # set new_mail_command = ''
 set nm_default_uri = "notmuch:///home/{{ system.username }}/Gmail"
 # set pager = 'builtin'
-# set pager_context = 0
+set pager_context = 3
 # set pager_format = '-%Z- %C/%m: %-20.20n   %s%*  -- (%P)'
-# set pager_index_lines = 0
-# set pager_stop = no
+set pager_index_lines = 10
+set pager_stop = yes
 # set pgp_auto_decode = no
 # set pgp_autoinline = no
 # set pgp_check_exit = yes
@@ -241,11 +245,12 @@ set postponed = "+[Gmail]/Drafts"
 # set prompt_after = yes
 # set query_command = ''
 # set query_format = '%4c %t %-25.25a %-25.25n %?e?(%e)?'
-# set quit = yes
+set quit = yes
 # set quote_regexp = '^([ \t]*[|>:}#])+'
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 # set read_inc = 10
 # set read_only = no
-# set realname = ''
+set realname = '{{ gmail.name }}'
 # set recall = ask-yes
 set record = "+[Gmail]/Sent Mail"
 # set reflow_space_quotes = yes
@@ -253,12 +258,12 @@ set record = "+[Gmail]/Sent Mail"
 # set reflow_wrap = 78
 # set reply_regexp = '^(re([\[0-9\]+])*|aw):[ \t]*'
 # set reply_self = no
-# set reply_to = ask-yes
+set reply_to = yes
 # set resolve = yes
 # set resume_draft_files = no
 # set resume_edited_draft_files = yes
 # set reverse_alias = no
-# set reverse_name = no
+set reverse_name = yes
 # set reverse_realname = yes
 # set rfc2047_parameters = no
 # set save_address = no
@@ -275,16 +280,17 @@ set record = "+[Gmail]/Sent Mail"
 # set sendmail_wait = 0
 # set shell = ''
 # set sidebar_delim_chars = '/.'
-# set sidebar_divider_char = '|'
+set sidebar_divider_char = ' |'
 # set sidebar_folder_indent = no
 # set sidebar_format = '%B%*  %n'
+set sidebar_format = '%B%* [%N/%S]'
 # set sidebar_indent_string = ''
 # set sidebar_new_mail_only = no
 # set sidebar_next_new_wrap = no
 # set sidebar_short_path = no
 # set sidebar_sort_method = 'order'
 set sidebar_visible = yes
-# set sidebar_width = 30
+set sidebar_width = 35
 # set sig_dashes = yes
 # set sig_on_top = no
 # set signature = '~/.signature'
@@ -321,10 +327,10 @@ set sidebar_visible = yes
 # set smtp_oauth_refresh_command = ''
 set smtp_pass = '{{ gmail.mutt_passwd }}'
 set smtp_url = 'smtps://{{ gmail.user }}@smtp.gmail.com:465/'
-# set sort = 'date'
+set sort = 'threads'
 # set sort_alias = 'alias'
-# set sort_aux = 'date'
-# set sort_browser = 'alpha'
+set sort_aux = 'reverse-last-date-received'
+set sort_browser = 'unsorted'
 # set sort_re = yes
 # set spam_separator = ','
 set spoolfile = "+Inbox"
@@ -344,14 +350,16 @@ set spoolfile = "+Inbox"
 # set ssl_verify_partial_chains = no
 # set ssl_ciphers = ''
 # set status_chars = '-*%A'
+set status_chars = ' *%A'
 # set status_format = '-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---'
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 # set status_on_top = no
 # set strict_threads = no
 # set suspend = yes
 # set text_flowed = no
 # set thorough_search = yes
 # set thread_received = no
-# set tilde = no
+set tilde = yes
 # set time_inc = 0
 # set timeout = 600
 # set tmpdir = ''
@@ -361,7 +369,7 @@ set spoolfile = "+Inbox"
 # set ts_enabled = no
 # set ts_status_format = 'Mutt with %?m?%m messages&no messages?%?n? [%n NEW]?'
 # set tunnel = ''
-# set uncollapse_jump = no
+set uncollapse_jump = yes
 # set uncollapse_new = yes
 # set use_8bitmime = no
 # set use_domain = yes
@@ -370,7 +378,7 @@ set spoolfile = "+Inbox"
 # set use_ipv6 = yes
 # set user_agent = yes
 # set visual = ''
-# set wait_key = yes
+set wait_key = no
 # set weed = yes
 # set wrap = 0
 # set wrap_headers = 78
@@ -379,10 +387,28 @@ set spoolfile = "+Inbox"
 # set write_bcc = yes
 # set write_inc = 10
 
+ignore *
+unignore from to cc date subject
+
+unhdr_order *
+hdr_order from to cc date subject
+
+bind compose     p        postpone-message
+
+bind index       <space>  collapse-thread
+bind index       p        recall-message
 bind index       X        vfolder-from-query
+
+bind index,pager \Cj      sidebar-next
+bind index,pager \Ck      sidebar-prev
+bind index,pager \Co      sidebar-open
 
 macro index O "<shell-escape>mailsync gmail<enter>"       "run mbsync to resync all gmail"
 macro index o "<shell-escape>mailsync gmail-inbox<enter>" "run mbsync to resync gmail inbox"
+macro index C "<copy-message>?<toggle-mailboxes>"       "copy a message to a mailbox"
+
+
+alternative_order text/plain text/enriched text/html
 
 
 mailboxes +Inbox \
@@ -401,3 +427,157 @@ mailboxes +Inbox \
           '+Boomerang' \
           '+Boomerang-Outbox' \
           '+Boomerang-Returned' \
+
+
+# ///////////////////////////////////////////////
+# // below copied from github.com/altercation/mutt-colors-solarized, dark-256
+# ///////////////////////////////////////////////
+
+#
+#
+# make sure that you are using mutt linked against slang, not ncurses, or
+# suffer the consequences of weird color issues. use "mutt -v" to check this.
+
+# custom body highlights -----------------------------------------------
+# highlight my name and other personally relevant strings
+#color body          color136        color234        "(ethan|schoonover)"
+# custom index highlights ----------------------------------------------
+# messages which mention my name in the body
+#color index         color136        color234        "~b \"phil(_g|\!| gregory| gold)|pgregory\" !~N !~T !~F !~p !~P"
+#color index         J_cream         color230        "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~N !~T !~F !~p !~P"
+#color index         color136        color37         "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~T !~F !~p !~P"
+#color index         color136        J_magent        "~b \"phil(_g|\!| gregory| gold)|pgregory\" ~F !~p !~P"
+## messages which are in reference to my mails
+#color index         J_magent        color234        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" !~N !~T !~F !~p !~P"
+#color index         J_magent        color230        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~N !~T !~F !~p !~P"
+#color index         J_magent        color37         "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~T !~F !~p !~P"
+#color index         J_magent        color160        "~x \"(mithrandir|aragorn)\\.aperiodic\\.net|thorin\\.hillmgt\\.com\" ~F !~p !~P"
+
+# for background in 16 color terminal, valid background colors include:
+# base03, bg, black, any of the non brights
+
+# basic colors ---------------------------------------------------------
+color normal        color241        color234
+color error         color160        color234
+color tilde         color235        color234
+color message       color37         color234
+color markers       color160        color254
+color attachment    color254        color234
+color search        color61         color234
+#color status        J_black         J_status
+color status        color241        color235
+color indicator     color234        color136
+color tree          color136        color234                                    # arrow in threads
+
+# basic monocolor screen
+mono  bold          bold
+mono  underline     underline
+mono  indicator     reverse
+mono  error         bold
+
+# index ----------------------------------------------------------------
+
+#color index         color160        color234        "~D(!~p|~p)"               # deleted
+#color index         color235        color234        ~F                         # flagged
+#color index         color166        color234        ~=                         # duplicate messages
+#color index         color240        color234        "~A!~N!~T!~p!~Q!~F!~D!~P"  # the rest
+#color index         J_base          color234        "~A~N!~T!~p!~Q!~F!~D"      # the rest, new
+color index         color160        color234        "~A"                        # all messages
+color index         color166        color234        "~E"                        # expired messages
+color index         color33         color234        "~N"                        # new messages
+color index         color33         color234        "~O"                        # old messages
+color index         color61         color234        "~Q"                        # messages that have been replied to
+color index         color240        color234        "~R"                        # read messages
+color index         color33         color234        "~U"                        # unread messages
+color index         color33         color234        "~U~$"                      # unread, unreferenced messages
+color index         color241        color234        "~v"                        # messages part of a collapsed thread
+color index         color241        color234        "~P"                        # messages from me
+color index         color37         color234        "~p!~F"                     # messages to me
+color index         color37         color234        "~N~p!~F"                   # new messages to me
+color index         color37         color234        "~U~p!~F"                   # unread messages to me
+color index         color240        color234        "~R~p!~F"                   # messages to me
+color index         color160        color234        "~F"                        # flagged messages
+color index         color160        color234        "~F~p"                      # flagged messages to me
+color index         color160        color234        "~N~F"                      # new flagged messages
+color index         color160        color234        "~N~F~p"                    # new flagged messages to me
+color index         color160        color234        "~U~F~p"                    # new flagged messages to me
+color index         color235        color160        "~D"                        # deleted messages
+color index         color245        color234        "~v~(!~N)"                  # collapsed thread with no unread
+color index         color136        color234        "~v~(~N)"                   # collapsed thread with some unread
+color index         color64         color234        "~N~v~(~N)"                 # collapsed thread with unread parent
+# statusbg used to indicated flagged when foreground color shows other status
+# for collapsed thread
+color index         color160        color235        "~v~(~F)!~N"                # collapsed thread with flagged, no unread
+color index         color136        color235        "~v~(~F~N)"                 # collapsed thread with some unread & flagged
+color index         color64         color235        "~N~v~(~F~N)"               # collapsed thread with unread parent & flagged
+color index         color64         color235        "~N~v~(~F)"                 # collapsed thread with unread parent, no unread inside, but some flagged
+color index         color37         color235        "~v~(~p)"                   # collapsed thread with unread parent, no unread inside, some to me directly
+color index         color136        color160        "~v~(~D)"                   # thread with deleted (doesn't differentiate between all or partial)
+#color index         color136        color234        "~(~N)"                    # messages in threads with some unread
+#color index         color64         color234        "~S"                       # superseded messages
+#color index         color160        color234        "~T"                       # tagged messages
+#color index         color166        color160        "~="                       # duplicated messages
+
+# message headers ------------------------------------------------------
+
+#color header        color240        color234        "^"
+color hdrdefault    color240        color234
+color header        color241        color234        "^(From)"
+color header        color33         color234        "^(Subject)"
+
+# body -----------------------------------------------------------------
+
+color quoted        color33         color234
+color quoted1       color37         color234
+color quoted2       color136        color234
+color quoted3       color160        color234
+color quoted4       color166        color234
+
+color signature     color240        color234
+color bold          color235        color234
+color underline     color235        color234
+color normal        color244        color234
+#
+color body          color245        color234        "[;:][-o][)/(|]"    # emoticons
+color body          color245        color234        "[;:][)(|]"         # emoticons
+color body          color245        color234        "[*]?((N)?ACK|CU|LOL|SCNR|BRB|BTW|CWYL|\
+                                                     |FWIW|vbg|GD&R|HTH|HTHBE|IMHO|IMNSHO|\
+                                                     |IRL|RTFM|ROTFL|ROFL|YMMV)[*]?"
+color body          color245        color234        "[ ][*][^*]*[*][ ]?" # more emoticon?
+color body          color245        color234        "[ ]?[*][^*]*[*][ ]" # more emoticon?
+
+## pgp
+
+color body          color160        color234        "(BAD signature)"
+color body          color37         color234        "(Good signature)"
+color body          color234        color234        "^gpg: Good signature .*"
+color body          color241        color234        "^gpg: "
+color body          color241        color160        "^gpg: BAD signature from.*"
+mono  body          bold                            "^gpg: Good signature"
+mono  body          bold                            "^gpg: BAD signature from.*"
+
+# yes, an insance URL regex
+color body          color160        color234        "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+# and a heavy handed email regex
+#color body          J_magent        color234        "((@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]),)*@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]):)?[0-9a-z_.+%$-]+@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\])"
+
+# Various smilies and the like
+#color body          color230        color234        "<[Gg]>"                            # <g>
+#color body          color230        color234        "<[Bb][Gg]>"                        # <bg>
+#color body          color136        color234        " [;:]-*[})>{(<|]"                  # :-) etc...
+# *bold*
+#color body          color33         color234        "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+#mono  body          bold                            "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
+# _underline_
+#color body          color33         color234        "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+#mono  body          underline                       "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
+# /italic/  (Sometimes gets directory names)
+#color body         color33         color234        "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
+#mono body          underline                       "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
+
+# Border lines.
+#color body          color33         color234        "( *[-+=#*~_]){6,}"
+
+#folder-hook .                  "color status        J_black         J_status        "
+#folder-hook gmail/inbox        "color status        J_black         color136        "
+#folder-hook gmail/important    "color status        J_black         color136        "
