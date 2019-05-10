@@ -22,5 +22,5 @@
   copy:
     dest: "/home/{{ system.username }}/.tmux.conf"
     src: tmux.conf
-    owner: travis
+    owner: "{{ system.username }}"
     mode: 0644
