@@ -4,6 +4,11 @@
     name: neomutt
     state: present
 
+- name: install w3m
+  pkgng:
+    name: w3m
+    state: present
+
 - name: mutt->neomutt symlink
   file:
     src: /usr/local/bin/neomutt
@@ -24,9 +29,16 @@
 
 - name: notmuch config
   template:
-    dest: "/home/{{ system.username}}/.notmuch-config"
+    dest: "/home/{{ system.username }}/.notmuch-config"
     src: notmuch-config
     mode: 0600
+    owner: "{{ system.username }}"
+
+- name: mailcap file
+  copy:
+    dest: "/home/{{ system.username }}/.mailcap"
+    src: mailcap
+    mode: 0644
     owner: "{{ system.username }}"
 
 - name: start a mutt tmux on reboot
