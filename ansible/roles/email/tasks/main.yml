@@ -9,6 +9,11 @@
     name: w3m
     state: present
 
+- name: install pandoc
+  pkgng:
+    name: hs-pandoc
+    state: present
+
 - name: mutt->neomutt symlink
   file:
     src: /usr/local/bin/neomutt
