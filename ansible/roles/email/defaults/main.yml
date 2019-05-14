@@ -3,3 +3,16 @@ gmail:
   name: 'Override Me'
   user: 'override@me.tld'
   mutt_passwd: 'not a real password'
+
+mailboxes:
+  - =Inbox
+  - =follow-up
+  - =awaiting-reply
+  - =watching
+  - =reading-material
+  - =[Gmail]/All Mail
+  - =[Gmail]/Drafts
+  - =[Gmail]/Sent Mail
+  - =[Gmail]/Spam
+  - =[Gmail]/Starred
+  - =[Gmail]/Trash
