@@ -403,6 +403,31 @@ bind index,pager \Cj      sidebar-next
 bind index,pager \Ck      sidebar-prev
 bind index,pager \Co      sidebar-open
 
+
+# this macro formats the (markdown) message as HTML and builds a multipart/alternative wrapper
+#
+# <enter-command> set pipe_decode=yes<enter>
+#     pipe_decode ensures mutt will decode the message when sending through a pipe
+# <pipe-message>pandoc ...<enter>
+#     pipe the message through pandoc to build an HTML file from the markdown
+# <enter-command> set pipe_decode=no<enter>
+#     now turn pipe_decode back off
+# <attach-file>^u/tmp/...<enter>
+#     add the generated HTML file as an attachment
+# <toggle-disposition>
+#     set the current (just added) attachment to Content-Disposition: inline
+# <edit-type>^utext/html<enter>
+#     set to Content-Type: text/html
+# <tag-entry>
+#     tag the current item: the generated html
+# <first-entry>
+#     select the first entry
+# <tag-entry>
+#     tag the current item: the original plaintext markdown
+# <group-alternatives>
+#     group the tagged items in a multipart/alternative
+# <edit-description>^u<enter>
+#     clear out the default multipart/alternative description
 macro compose M "\
 <enter-command>set pipe_decode=yes<enter>\
 <pipe-message>pandoc -s -f gfm -t html5 -o /tmp/mutt-pandoc-buf.html<enter>\
@@ -410,8 +435,8 @@ macro compose M "\
 <attach-file>^u/tmp/mutt-pandoc-buf.html<enter>\
 <toggle-disposition>\
 <edit-type>^utext/html<enter>\
-<first-entry>\
 <tag-entry>\
+<first-entry>\
 <tag-entry>\
 <group-alternatives>\
 <edit-description>^u<enter>\
