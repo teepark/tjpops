@@ -65,8 +65,8 @@ set delete = yes
 # set dsn_notify = ''
 # set dsn_return = ''
 # set duplicate_threads = yes
-set edit_headers = yes
-set editor = 'vim'
+set edit_headers = no
+set editor = 'vim -c "set ft=markdown"'
 # set encode_from = no
 # set entropy_file = ''
 # set envelope_from_address = ''
