@@ -13,6 +13,5 @@ mailboxes:
   - =[Gmail]/All Mail
   - =[Gmail]/Drafts
   - =[Gmail]/Sent Mail
-  - =[Gmail]/Spam
   - =[Gmail]/Starred
   - =[Gmail]/Trash
