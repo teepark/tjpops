@@ -38,7 +38,7 @@
     hour: 8
     minute: 45
     user: "{{ system.username }}"
-    job: "chpst -e /home/{{ system.username }}/.gmail-backups/b2 restic --password-file=/home/{{ system.username }}/.gmail-backups/restic-repo-passwd -r b2:{{ gmail_b2_backup.repo.bucket }}:{{ gmail_b2_backup.repo.path }} backup /home/{{ system.username }}/Gmail"
+    job: "time chpst -e /home/{{ system.username }}/.gmail-backups/b2 restic --password-file=/home/{{ system.username }}/.gmail-backups/restic-repo-passwd -r b2:{{ gmail_b2_backup.repo.bucket }}:{{ gmail_b2_backup.repo.path }} backup /home/{{ system.username }}/Gmail"
 
 - name: daily gmail pruning cron
   cron:
@@ -46,4 +46,4 @@
     hour: 13
     minute: 0
     user: "{{ system.username }}"
-    job: "chpst -e /home/{{ system.username }}/.gmail-backups/b2 restic --password-file=/home/{{ system.username }}/.gmail-backups/restic-repo-passwd -r b2:{{ gmail_b2_backup.repo.bucket }}:{{ gmail_b2_backup.repo.path }} forget --keep-daily 3 --keep-monthly 12 --keep-yearly 100 --keep-tag retain --prune"
+    job: "time chpst -e /home/{{ system.username }}/.gmail-backups/b2 restic --password-file=/home/{{ system.username }}/.gmail-backups/restic-repo-passwd -r b2:{{ gmail_b2_backup.repo.bucket }}:{{ gmail_b2_backup.repo.path }} forget --keep-daily 3 --keep-monthly 12 --keep-yearly 100 --keep-tag retain --prune"

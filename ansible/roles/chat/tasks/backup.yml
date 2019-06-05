@@ -38,7 +38,7 @@
     hour: 8
     minute: 0
     user: "{{ system.username }}"
-    job: "chpst -e /home/{{ system.username }}/.weechat-backups/b2 restic --password-file=/home/{{ system.username }}/.weechat-backups/restic-repo-passwd -r b2:{{ weechat_config_b2_backup.repo.bucket }}:{{ weechat_config_b2_backup.repo.path }} backup /home/{{ system.username }}/.weechat"
+    job: "time chpst -e /home/{{ system.username }}/.weechat-backups/b2 restic --password-file=/home/{{ system.username }}/.weechat-backups/restic-repo-passwd -r b2:{{ weechat_config_b2_backup.repo.bucket }}:{{ weechat_config_b2_backup.repo.path }} backup /home/{{ system.username }}/.weechat"
 
 - name: daily weechat config pruning cron
   cron:
@@ -46,4 +46,4 @@
     hour: 12
     minute: 0
     user: "{{ system.username }}"
-    job: "chpst -e /home/{{ system.username }}/.weechat-backups/b2 restic --password-file=/home/{{ system.username }}/.weechat-backups/restic-repo-passwd -r b2:{{ weechat_config_b2_backup.repo.bucket }}:{{ weechat_config_b2_backup.repo.path }} forget --keep-daily 7 --keep-monthly 12 --keep-yearly 100 --keep-tag retain --prune"
+    job: "time chpst -e /home/{{ system.username }}/.weechat-backups/b2 restic --password-file=/home/{{ system.username }}/.weechat-backups/restic-repo-passwd -r b2:{{ weechat_config_b2_backup.repo.bucket }}:{{ weechat_config_b2_backup.repo.path }} forget --keep-daily 7 --keep-monthly 12 --keep-yearly 100 --keep-tag retain --prune"
