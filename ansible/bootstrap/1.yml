@@ -8,7 +8,7 @@
     ansible_user: root
   tasks:
     - name: install python
-      raw: pkg install -y python36
+      raw: pkg install -y python3
 
     - name: install sudo
       raw: pkg install -y sudo
