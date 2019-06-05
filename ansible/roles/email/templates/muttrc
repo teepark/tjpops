@@ -66,7 +66,7 @@ set delete = yes
 # set dsn_return = ''
 # set duplicate_threads = yes
 set edit_headers = no
-set editor = 'vim -c "set ft=markdown"'
+set editor = 'nvim -c "set ft=markdown"'
 # set encode_from = no
 # set entropy_file = ''
 # set envelope_from_address = ''
