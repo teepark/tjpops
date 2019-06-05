@@ -1,0 +1,6 @@
+---
+- name: install python 3.6 pip
+  pkgng:
+    name: py36-pip
+    state: present
+  notify: "pip installed"

@@ -1,0 +1,19 @@
+---
+- name: install base dev packages
+  pkgng:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - neovim
+    - go
+    - ripgrep
+
+- name: nvim config file
+  copy:
+    dest: "/home/{{ system.username }}/.config/nvim/init.vim"
+    src: init.vim
+    mode: 0644
+    owner: "{{ system.username }}"
+
+- import_tasks: python.yml

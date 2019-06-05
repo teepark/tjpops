@@ -1,0 +1,19 @@
+---
+- name: update pip
+  pip:
+    name: pip
+    extra_args: "--upgrade"
+    executable: pip-3.6
+  listen: "pip installed"
+
+- name: install pip packages
+  pip:
+    name: "{{ item }}"
+  loop:
+    - virtualenv
+    - flake8
+    - mypy
+    - pylint
+    - neovim
+    - jedi
+  listen: "pip installed"
