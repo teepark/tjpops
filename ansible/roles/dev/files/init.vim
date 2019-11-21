@@ -132,7 +132,6 @@ let g:deoplete#omni#input_patterns = {}
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#align_class = 1
 
-let g:pymode_paths = ['typestubs/', 'actions/', 'admins/', 'affirm-frontend/', 'affirm-users/', 'agents/', 'aliases/', 'applications/', 'ari-service/', 'auth/', 'bank_ledger/', 'bank_loan_sales/', 'bank_portal/', 'bankroutingdb/', 'batch/', 'blueprints/', 'build-tools/', 'business_logic/', 'capabilities/', 'cards/', 'charlotte/', 'charlotte4/', 'counters/', 'crm/', 'crypto/', 'data_migration/', 'debugapp/', 'docs/', 'employees/', 'event_bus/', 'experiments/', 'ext_services/', 'fpna/', 'fquid/', 'furnishing/', 'http/', 'identifier_events/', 'infra/', 'issuer/', 'login-flows/', 'login-sessions/', 'merchants-analytics/', 'merchants/', 'messages/', 'metadata/', 'ml/', 'models/', 'nosql_models/', 'orchestration/', 'pfm/', 'policy/', 'policy_store/', 'policy_tracking/', 'preferences/', 'promos/', 'reconciliation/', 'reports/', 'risk/', 'risk_offline/', 'roles/', 'search/', 'session/', 'signals/', 'sql-store/', 'testing-toolbox/', 'tokens/', 'toolbox/', 'tracking/', 'traintrack/', 'trainyard/', 'unity/', 'virtual_cards/', 'anywhere/']
 let g:neosnippet#snippets_directory = "~/.vim/plugged/neosnippet-snippets/neosnippets"
 
 let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
